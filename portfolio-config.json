@@ -1,0 +1,13 @@
+{
+  "name": "Portfolio Project",
+  "version": "1.0.0",
+  "description": "A sample portfolio project configuration",
+  "author": "Portfolio Owner",
+  "scripts": {
+    "build": "echo 'Building portfolio...'",
+    "deploy": "echo 'Deploying portfolio...'"
+  },
+  "keywords": ["portfolio", "web", "responsive"],
+  "dependencies": {},
+  "devDependencies": {}
+}
