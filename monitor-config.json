@@ -1,0 +1,26 @@
+{
+  "monitor": {
+    "watchDir": ".",
+    "logFile": "portfolio-changes.log",
+    "checkInterval": 5000,
+    "excludePatterns": [
+      ".git",
+      "node_modules",
+      ".DS_Store",
+      "*.tmp",
+      "*.log",
+      ".vscode",
+      ".idea"
+    ],
+    "notifications": {
+      "enabled": true,
+      "logToConsole": true,
+      "logToFile": true
+    }
+  },
+  "fileTypes": {
+    "portfolio": [".html", ".css", ".js", ".json", ".md", ".txt"],
+    "images": [".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp"],
+    "documents": [".pdf", ".doc", ".docx"]
+  }
+}

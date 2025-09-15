@@ -1,0 +1,24 @@
+{
+  "name": "portfolio-monitor",
+  "version": "1.0.0",
+  "description": "A file monitoring system for portfolio changes",
+  "main": "monitor.js",
+  "scripts": {
+    "start": "node monitor.js start",
+    "monitor": "node monitor.js start",
+    "status": "node monitor.js status",
+    "check": "node monitor.js check",
+    "test": "node test-monitor.js"
+  },
+  "keywords": [
+    "portfolio",
+    "monitor",
+    "file-watcher",
+    "change-detection"
+  ],
+  "author": "Portfolio Monitor",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
