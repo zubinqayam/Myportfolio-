@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zubin Qayam | Strategic Healthcare Business Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General Styles */
+        body { font-family: 'Inter', sans-serif; color: #212529; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .gradient-bg { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); }
+        .hidden-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .visible-section { opacity: 1; transform: translateY(0); }
+
+        /* Dashboard/Tabs Specific Styles */
+        .dashboard-container { background-color: #f1f5f9; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+       .chart-container-mini {
+            position: relative;
+            height: 150px;
+            width: 100%;
+        }
+        /* New Color Palette Classes */
+        .super-title { color: #ae2012; } /* A deep red for emphasis */
+        .primary-color { color: #005f73; }
+        .secondary-color { color: #0a9396; }
+        .accent-color { color: #ee9b00; }
+        .danger-color { color: #ca6702; }
+        .flow-arrow::after { content: '→'; font-size: 2rem; line-height: 1; color: #0a9396; margin-left: 0.5rem; margin-right: 0.5rem; }
+        .prose ul { list-style-type: disc; padding-left: 1.5rem; }
+        .prose li { margin-bottom: 0.5rem; }
+
+        .tab-button { padding: 0.75rem 1.5rem; font-weight: 600; color: #475569; border-bottom: 3px solid transparent; transition: all 0.3s ease; }
+        .tab-button.active-tab { color: #005f73; border-bottom-color: #005f73; }
+        .text-gradient-primary { background-image: linear-gradient(to right, #005f73, #0a9396); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-white/30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-[#005f73] to-[#0a9396] rounded-full flex items-center justify-center">
+                        <i class="fas fa-user-md text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gradient-primary">
+                        Zubin Qayam Portfolio
+                    </span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#resume" class="text-gray-600 hover:primary-color transition-colors">Resume</a>
+                    <a href="#publications" class="text-gray-600 hover:primary-color transition-colors">Publications</a>
+                    <a href="#projects" class="text-gray-600 hover:primary-color transition-colors">Projects</a>
+                    <a href="#market" class="text-gray-600 hover:primary-color transition-colors">Market Analysis</a>
+                    <a href="#dashboards" class="text-gray-600 hover:primary-color transition-colors">Dashboards</a>
+                    <a href="#contact" class="text-gray-600 hover:primary-color transition-colors">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-lg shadow-lg">
+            <div class="flex flex-col items-center space-y-4 py-6">
+                <a href="#resume" class="mobile-link text-gray-700 hover:primary-color text-lg">Resume</a>
+                <a href="#publications" class="mobile-link text-gray-700 hover:primary-color text-lg">Publications</a>
+                <a href="#projects" class="mobile-link text-gray-700 hover:primary-color text-lg">Projects</a>
+                <a href="#market" class="mobile-link text-gray-700 hover:primary-color text-lg">Market Analysis</a>
+                <a href="#dashboards" class="mobile-link text-gray-700 hover:primary-color text-lg">Dashboards</a>
+                <a href="#contact" class="mobile-link text-gray-700 hover:primary-color text-lg">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="top" class="pt-32 pb-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-white/85 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-16 text-center shadow-2xl">
+                <div class="mb-8 animate-float">
+                    <div class="w-20 h-20 bg-gradient-to-r from-[#005f73] to-[#0a9396] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-user-md text-white text-3xl"></i>
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gradient-primary mb-2 leading-tight">
+                    Zubin Qayam
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-6">Healthcare Business Development Specialist</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Aligning corporate health strategies with Oman Vision 2040. Driving industrial healthcare innovation through strategic partnerships and data-driven execution.
+                </p>
+
+                <!-- Key Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+                    <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/40 card-hover">
+                        <div class="text-3xl font-bold primary-color mb-2">15+</div>
+                        <div class="text-sm text-gray-600 font-medium">Medical Service Implementations</div>
+                    </div>
+                    <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/40 card-hover">
+                        <div class="text-3xl font-bold secondary-color mb-2">20+</div>
+                        <div class="text-sm text-gray-600 font-medium">Major Corporate Clients</div>
+                    </div>
+                    <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/40 card-hover">
+                        <div class="text-3xl font-bold accent-color mb-2">40%</div>
+                        <div class="text-sm text-gray-600 font-medium">Avg. Approval Time Reduction</div>
+                    </div>
+                    <div class="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/40 card-hover">
+                        <div class="text-3xl font-bold danger-color mb-2">95%</div>
+                        <div class="text-sm text-gray-600 font-medium">Regulatory Compliance Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Summary Section -->
+    <section id="resume" class="py-16 px-6 bg-white/30 hidden-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Executive Summary</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 lg:col-span-2">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Professional Profile</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Strategic Business Development & Marketing Leader with 4+ years of experience in new business acquisition, corporate partnership development, and industrial healthcare market expansion. Proven track record of generating multi-million-dollar opportunities across Oman's major industrial projects.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Skilled in B2B relationship building, corporate medical service design, and market penetration strategies aligned with national development objectives. Author of a comprehensive industry analysis on occupational health and safety frameworks in major energy projects.
+                    </p>
+                </div>
+
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Core Competencies</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>Business Development & Strategic Partnerships</li>
+                        <li>Industrial & Corporate Healthcare Solutions</li>
+                        <li>Referral & Corporate Marketing Programs</li>
+                        <li>Market Expansion & Revenue Growth</li>
+                        <li>Client Relations & Contract Negotiations</li>
+                        <li>AI & Digital Transformation in Marketing</li>
+                        <li>Occupational Health & Safety Frameworks</li>
+                        <li>Oman Vision 2040 Strategic Alignment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Experience Timeline -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 mt-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Professional Experience</h3>
+                <div class="space-y-6">
+                    <div class="border-l-4 border-[#005f73] pl-4 py-1">
+                        <h4 class="text-xl font-semibold">Business Development & Marketing Executive</h4>
+                        <p class="text-gray-600">Lifeline Hospital, Sohar, Oman | 2020 – Present</p>
+                        <ul class="list-disc pl-5 mt-3 space-y-2 text-gray-700">
+                            <li>Spearheaded corporate medical partnerships with key industrial players, securing multi-year contracts.</li>
+                            <li>Developed referral marketing programs that increased patient intake by 40% in under two years.</li>
+                            <li>Coordinated medical camps for industrial clients such as L&T MFI, Sohar Aluminium, United Solar Clinic, and Marsa LNG Project.</li>
+                            <li>Secured strategic approvals and partnerships expanding the corporate client base.</li>
+                            <li>Delivered tailored B2B healthcare packages aligned with Oman Vision 2040.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-16 px-6 hidden-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Thought Leadership</h2>
+                <p class="text-lg text-gray-600">Contributing to the discourse on industrial health and safety.</p>
+            </div>
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 card-hover max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-shrink-0">
+                        <div class="w-24 h-24 bg-gradient-to-br from-[#005f73] to-[#0a9396] rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-book-open text-white text-4xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Industry Analysis Publication</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            Authored a comprehensive industry analysis on "Occupational Health and Safety Frameworks in Major Energy Projects," providing critical insights into risk management, regulatory compliance, and best practices for ensuring workforce well-being in high-stakes industrial environments.
+                        </p>
+                        <a href="#" class="font-semibold secondary-color hover:accent-color transition-colors">
+                            Request a Copy &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Projects Section -->
+    <section id="projects" class="py-16 px-6 bg-white/30 hidden-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Key Projects & Business Impact</h2>
+                <p class="text-lg text-gray-600">Leading healthcare initiatives across major industrial projects with significant business value</p>
+            </div>
+
+            <!-- Project Impact Table -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Project Portfolio & Business Metrics</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="text-left p-4 font-bold text-gray-800">Project</th>
+                                <th class="text-center p-4 font-bold text-gray-800">Industry Sector</th>
+                                <th class="text-center p-4 font-bold text-gray-800">Workforce Size</th>
+                                <th class="text-center p-4 font-bold text-gray-800">Estimated Investment (OMR)</th>
+                                <th class="text-center p-4 font-bold text-gray-800">Business Value</th>
+                                <th class="text-center p-4 font-bold text-gray-800">Key Achievements</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">Marsa LNG Project</td>
+                                <td class="p-4 text-center">Energy (LNG)</td>
+                                <td class="p-4 text-center">5,000+</td>
+                                <td class="p-4 text-center">600 Million</td>
+                                <td class="p-4 text-center">Multi-year healthcare contract</td>
+                                <td class="p-4">Facilitated healthcare partnerships with major EPC contractors</td>
+                            </tr>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">United Solar Clinic</td>
+                                <td class="p-4 text-center">Renewables (Solar)</td>
+                                <td class="p-4 text-center">4,000+</td>
+                                <td class="p-4 text-center">210 Million</td>
+                                <td class="p-4 text-center">Comprehensive medical service package</td>
+                                <td class="p-4">Established on-site clinic model for polysilicon manufacturing</td>
+                            </tr>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">Sohar Aluminium</td>
+                                <td class="p-4 text-center">Industrial (Aluminium)</td>
+                                <td class="p-4 text-center">2,500+</td>
+                                <td class="p-4 text-center">N/A (Existing Facility)</td>
+                                <td class="p-4 text-center">Ongoing healthcare program</td>
+                                <td class="p-4">Implemented digital health tracking systems</td>
+                            </tr>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">Shurooq Solar Energy</td>
+                                <td class="p-4 text-center">Renewables (Solar)</td>
+                                <td class="p-4 text-center">1,500+</td>
+                                <td class="p-4 text-center">N/A (Part of larger project)</td>
+                                <td class="p-4 text-center">Referral marketing program</td>
+                                <td class="p-4">Streamlined approval workflows and patient onboarding</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Business Opportunity Visualization -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Project Investment & Workforce Correlation</h3>
+                    <div class="relative h-80">
+                        <canvas id="investmentWorkforceChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Healthcare Service Implementation Progress</h3>
+                    <div class="relative h-80">
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Project Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-teal-50 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-bolt secondary-color text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800">Marsa LNG Project</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Supported healthcare partnership negotiations and referral marketing for a $1.6 billion renewable-powered LNG facility.
+                    </p>
+                    <div class="flex justify-between text-sm">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Energy</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">5,000+ Workforce</span>
+                    </div>
+                </div>
+
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-teal-50 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-solar-panel secondary-color text-xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800">United Solar Clinic</h4>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Facilitated setup and referral strategy for a $565 million solar manufacturing facility.
+                    </p>
+                    <div class="flex justify-between text-sm">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">Renewables</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full">4,000+ Workforce</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Analysis & Business Opportunity Section -->
+    <section id="market" class="py-16 px-6 bg-white/30 hidden-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Market Analysis & Business Opportunity</h2>
+                <p class="text-lg text-gray-600">Strategic insights into the industrial healthcare market in Oman and future opportunities</p>
+            </div>
+
+            <!-- Market Size Visualization -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Industrial Healthcare Market Potential</h3>
+                <div class="relative h-80">
+                    <canvas id="marketChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Business Opportunity Table -->
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Emerging Business Opportunities</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="text-left p-4 font-bold text-gray-800">Sector</th>
+                                <th class="text-left p-4 font-bold text-gray-800">Key Projects</th>
+                                <th class="text-center p-4 font-bold text-gray-800">Estimated Workforce</th>
+                                <th class="text-left p-4 font-bold text-gray-800">Healthcare Needs</th>
+                                <th class="text-left p-4 font-bold text-gray-800">Business Potential</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">Renewable Energy</td>
+                                <td class="p-4">JA Solar, Jietai Solar, Shurooq Solar</td>
+                                <td class="p-4 text-center">15,000+</td>
+                                <td class="p-4">Chemical exposure, dust inhalation, night shift protocols</td>
+                                <td class="p-4">High - Growing sector with multiple projects</td>
+                            </tr>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">Petrochemicals</td>
+                                <td class="p-4">Duqm Refinery, Liwa Plastics</td>
+                                <td class="p-4 text-center">10,000+</td>
+                                <td class="p-4">Chemical hazards, fire/explosion risks, emergency response</td>
+                                <td class="p-4">High - Established but expanding sector</td>
+                            </tr>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">Metals & Mining</td>
+                                <td class="p-4">Sohar Aluminium, Vale Oman</td>
+                                <td class="p-4 text-center">8,000+</td>
+                                <td class="p-4">Heat stress, respiratory issues, musculoskeletal disorders</td>
+                                <td class="p-4">Medium - Mature sector with optimization opportunities</td>
+                            </tr>
+                            <tr class="border-b hover:bg-teal-50/50 transition-colors">
+                                <td class="p-4 font-medium primary-color">Logistics & Ports</td>
+                                <td class="p-4">SOHAR Port, Salalah Port</td>
+                                <td class="p-4 text-center">5,000+</td>
+                                <td class="p-4">Vehicular accidents, cargo handling injuries, ergonomics</td>
+                                <td class="p-4">Medium - Steady demand for occupational health services</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In-Depth Dashboards Section -->
+    <section id="dashboards" class="py-16 px-6 bg-white/50 hidden-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">In-Depth Analysis Dashboards</h2>
+                <p class="text-lg text-gray-600">Toggle between detailed reports on Manpower and Business Opportunities.</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="mb-8 flex flex-wrap justify-center border-b border-gray-300">
+                <button class="tab-button active-tab" data-tab="manpower-dashboard">Shutdown Manpower Analysis</button>
+                <button class="tab-button" data-tab="sohar-dashboard">SOHAR Opportunity Overview</button>
+                 <button class="tab-button" data-tab="sohar-snapshot">Business Snapshot</button>
+                <button class="tab-button" data-tab="vision-2040-deck">Vision 2040 Deck</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="manpower-dashboard" class="tab-content dashboard-container p-4 md:p-8 rounded-lg shadow-inner">
+                 <header class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-black text-gray-800 mb-2">Powering Progress Through Precision</h1>
+                    <p class="text-lg md:text-xl font-semibold super-title">Analyzing Manpower Dynamics for Heavy Industry Shutdowns at SOHAR Port and Freezone</p>
+                </header>
+                <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <section class="md:col-span-2 bg-white rounded-lg shadow-md p-6 flex flex-col md:flex-row items-center justify-center text-center">
+                        <div class="md:w-1/2">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-2">The Scale of Operations</h2>
+                            <p class="text-gray-600 mb-4">Major planned shutdowns are immense logistical operations, critical for maintaining the integrity and efficiency of SOHAR's heavy industries. These events require a massive, temporary influx of skilled professionals to perform thousands of maintenance, inspection, and upgrade tasks within a compressed timeframe. The success of these turnarounds underpins the region's industrial output and safety standards.</p>
+                        </div>
+                        <div class="md:w-1/2 flex flex-col items-center justify-center">
+                            <p class="text-lg font-semibold text-gray-600">Total Recurring Manpower Mobilized Annually</p>
+                            <p class="text-8xl font-black danger-color">8,500+</p>
+                            <p class="text-lg font-semibold text-gray-600">Specialized Personnel</p>
+                        </div>
+                    </section>
+                    <section class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Demand by Industrial Sector</h2>
+                        <p class="text-gray-600 mb-4 text-center">SOHAR's diverse industrial base drives varied manpower needs. Refineries and petrochemical plants, with their complex systems, represent the largest demand for shutdown specialists, followed closely by the metals and minerals processing sector.</p>
+                        <div class="chart-container">
+                            <canvas id="sectorDemandChart"></canvas>
+                        </div>
+                    </section>
+                    <section class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Workforce Composition</h2>
+                        <p class="text-gray-600 mb-4 text-center">A successful shutdown leverages a strategic blend of local and international expertise. While a significant portion of the skilled workforce is sourced from within Oman, specialized international contractors are essential for roles requiring niche technical skills and experience with specific proprietary equipment.</p>
+                        <div class="chart-container">
+                            <canvas id="workforceCompositionChart"></canvas>
+                        </div>
+                    </section>
+                    <section class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Critical Skills in High Demand</h2>
+                        <p class="text-gray-600 mb-4 text-center max-w-4xl mx-auto">The technical complexity of a turnaround necessitates a wide array of specialized skills. Mechanical trades form the backbone of the workforce, responsible for dismantling, repairing, and reassembling critical machinery. They are supported by a large contingent of scaffolders, welders, and electrical technicians who ensure safe access and operational integrity.</p>
+                        <div class="chart-container h-[400px] md:h-[450px] max-h-[500px]">
+                            <canvas id="skillsDemandChart"></canvas>
+                        </div>
+                    </section>
+                    <section class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">Typical 12-Week Mobilization Timeline</h2>
+                        <p class="text-gray-600 mb-4 text-center max-w-4xl mx-auto">Manpower deployment follows a meticulously planned curve. The initial weeks focus on preparation and scaffolding. The workforce rapidly peaks as critical path activities commence, holding steady during the core maintenance phase before ramping down as systems are tested and brought back online.</p>
+                        <div class="chart-container h-[350px] md:h-[400px] max-h-[450px]">
+                            <canvas id="mobilizationTimelineChart"></canvas>
+                        </div>
+                    </section>
+                    <section class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">The Shutdown Process Flow</h2>
+                        <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-4">
+                            <div class="text-center p-4 border-2 border-gray-200 rounded-lg w-full md:w-1/5">
+                                <p class="text-4xl mb-2">①</p>
+                                <h3 class="font-bold secondary-color">Planning & Scoping</h3>
+                                <p class="text-sm text-gray-600">6-12 months prior. Defining work, budgeting, and resource planning.</p>
+                            </div>
+                            <div class="text-2xl font-bold text-gray-400">➔</div>
+                            <div class="text-center p-4 border-2 border-gray-200 rounded-lg w-full md:w-1/5">
+                                <p class="text-4xl mb-2">②</p>
+                                <h3 class="font-bold secondary-color">Pre-Shutdown</h3>
+                                <p class="text-sm text-gray-600">1-2 months prior. Mobilization, site prep, and pre-fabrication.</p>
+                            </div>
+                            <div class="text-2xl font-bold text-gray-400">➔</div>
+                            <div class="text-center p-4 border-2 border-red-200 rounded-lg w-full md:w-1/5 bg-red-50">
+                                <p class="text-4xl mb-2">③</p>
+                                <h3 class="font-bold super-title">Execution</h3>
+                                <p class="text-sm text-gray-600">Peak activity. Shutdown, inspection, repair, and upgrades.</p>
+                            </div>
+                              <div class="text-2xl font-bold text-gray-400">➔</div>
+                            <div class="text-center p-4 border-2 border-gray-200 rounded-lg w-full md:w-1/5">
+                                <p class="text-4xl mb-2">④</p>
+                                <h3 class="font-bold primary-color">Start-Up</h3>
+                                <p class="text-sm text-gray-600">System testing, commissioning, and ramp-up to full production.</p>
+                            </div>
+                              <div class="text-2xl font-bold text-gray-400">➔</div>
+                            <div class="text-center p-4 border-2 border-gray-200 rounded-lg w-full md:w-1/5">
+                                <p class="text-4xl mb-2">⑤</p>
+                                <h3 class="font-bold accent-color">Review</h3>
+                                <p class="text-sm text-gray-600">Post-shutdown analysis, lesson learned, and final reporting.</p>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            <div id="sohar-dashboard" class="tab-content dashboard-container p-4 md:p-8 rounded-lg shadow-inner" style="display:none;">
+                <header class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-black text-gray-800 mb-2">Your Gateway to Business Growth</h1>
+                    <p class="text-lg text-gray-600 super-title">An Overview of Opportunities at SOHAR Port and Freezone</p>
+                </header>
+                <section class="mb-12 p-6 bg-white rounded-lg shadow-md border border-gray-200">
+                <h2 class="text-2xl font-bold text-center mb-6">SOHAR: A Profile of Success</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-4xl font-extrabold secondary-color">$30B+</p>
+                        <p class="mt-1 font-semibold text-gray-700">Total Investment Attracted</p>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <p class="text-4xl font-extrabold accent-color">21M+ sq m</p>
+                        <p class="mt-1 font-semibold text-gray-700">Expansive Freezone Area</p>
+                    </div>
+                    <div class="bg-teal-50 p-4 rounded-lg">
+                        <p class="text-4xl font-extrabold primary-color">8,500+</p>
+                        <p class="mt-1 font-semibold text-gray-700">Recurring Shutdown Workforce</p>
+                    </div>
+                </div>
+                  <div class="mt-6 text-center">
+                    <img src="https://placehold.co/800x300/0a9396/FFFFFF?text=Modern+Industrial+Port" alt="A modern, bustling industrial port at sunset" class="w-full max-w-3xl mx-auto rounded-lg shadow-md">
+                </div>
+                </section>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <article class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-1 text-center text-gray-800">Investment Hotspots</h3>
+                        <p class="text-center text-gray-600 mb-4">Breakdown of $1.3B+ in recent investments, showcasing key growth sectors.</p>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="investmentChart"></canvas>
+                        </div>
+                    </article>
+                    <article class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-1 text-center text-gray-800">Manpower & Service Opportunities</h3>
+                        <p class="text-center text-gray-600 mb-4">The recurring demand for 8,500+ specialists creates a market for service providers.</p>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="manpowerChart"></canvas>
+                        </div>
+                    </article>
+                </div>
+                <!-- ✨ AI-Powered Strategic Toolkit ✨ -->
+                <section id="ai-toolkit" class="mt-12 bg-white p-6 rounded-lg shadow-md border-2 border-dashed border-yellow-400">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">✨ AI-Powered Strategic Toolkit ✨</h3>
+                        <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Leverage the Gemini API to instantly synthesize the data on this page into actionable business insights.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button id="generateSummaryBtn" class="bg-yellow-400 text-yellow-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-500 transition-all shadow-sm flex items-center justify-center">
+                                <i class="fas fa-rocket mr-2"></i> Generate Executive Summary
+                            </button>
+                            <button id="generateStrategyBtn" class="bg-gray-800 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-900 transition-all shadow-sm flex items-center justify-center">
+                                <i class="fas fa-lightbulb mr-2"></i> Draft Go-to-Market Strategy
+                            </button>
+                        </div>
+                    </div>
+                    <div id="ai-output" class="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200" style="display: none;">
+                        <h4 id="ai-output-title" class="font-bold text-lg mb-4 text-gray-800"></h4>
+                        <div id="ai-output-content" class="text-gray-700 leading-relaxed prose">
+                            <!-- AI generated content will appear here -->
+                        </div>
+                    </div>
+                </section>
+                <section class="mt-12 bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">Project Pipeline: The Path to Future Growth</h3>
+                    <div class="flex flex-col md:flex-row items-center justify-center text-center">
+                        <div class="flex-1 p-4 bg-gray-50 rounded-lg m-2 border-2 border-gray-200">
+                            <p class="text-lg font-bold danger-color">Infrastructure Expansion</p>
+                            <p class="text-sm text-gray-600">670-hectare development to increase capacity and attract future industries.</p>
+                        </div>
+                        <div class="flow-arrow hidden md:block"></div>
+                          <div class="text-2xl md:hidden my-2 text-gray-400">↓</div>
+                        <div class="flex-1 p-4 bg-gray-50 rounded-lg m-2 border-2 border-gray-200">
+                            <p class="text-lg font-bold accent-color">Polysilicon Facility</p>
+                            <p class="text-sm text-gray-600">Largest of its kind in the Middle East, anchoring the green manufacturing hub.</p>
+                        </div>
+                        <div class="flow-arrow hidden md:block"></div>
+                        <div class="text-2xl md:hidden my-2 text-gray-400">↓</div>
+                        <div class="flex-1 p-4 bg-gray-50 rounded-lg m-2 border-2 border-gray-200">
+                            <p class="text-lg font-bold primary-color">Iron Ore Plant</p>
+                            <p class="text-sm text-gray-600">Oman's first concentration plant, strengthening the metals value chain.</p>
+                        </div>
+                    </div>
+                </section>
+                <section class="mt-12 bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-gray-800">Strategic Advantages: Why SOHAR?</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Advantage</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <tr class="border-b">
+                                    <td class="text-left py-3 px-4 font-semibold secondary-color">Strategic Location</td>
+                                    <td class="text-left py-3 px-4">Prime access to global trade routes outside the Strait of Hormuz, connecting East and West.</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="text-left py-3 px-4 font-semibold secondary-color">World-Class Infrastructure</td>
+                                    <td class="text-left py-3 px-4">Deep-water port, modern terminals, and an integrated, expanding Freezone.</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left py-3 px-4 font-semibold secondary-color">Strong Investor Confidence</td>
+                                    <td class="text-left py-3 px-4">Proven track record of attracting multi-billion dollar projects and enabling business success.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+             <div id="vision-2040-deck" class="tab-content dashboard-container p-4 md:p-8 rounded-lg shadow-inner" style="display:none;">
+                <header class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-black text-gray-800 mb-2">Oman Vision 2040</h1>
+                    <p class="text-lg md:text-xl font-semibold super-title">Visual Strategy Deck</p>
+                </header>
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+                    <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                        <h2 class="text-2xl font-bold text-gray-800">Presentation Deck</h2>
+                        <a href="https://www.canva.com/design/DAGzJY-xnos/1OXVg1w1NdUf6lrmC_HZMw/view?utm_content=DAGzJY-xnos&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50">
+                            <i class="fas fa-external-link-alt"></i>
+                            Open in Canva
+                        </a>
+                    </div>
+                    <div class="w-full">
+                         <iframe src="https://www.canva.com/design/DAGzJY-xnos/1OXVg1w1NdUf6lrmC_HZMw/view?embed" title="Canva – Vision 2040 Deck" class="w-full h-[600px] md:h-[700px] rounded-lg border border-gray-200" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-3 text-center">If the preview doesn’t load, please use the “Open in Canva” button above.</p>
+                </div>
+            </div>
+            <div id="sohar-snapshot" class="tab-content dashboard-container p-4 md:p-8 rounded-lg shadow-inner flex justify-center items-center" style="display:none;">
+                 <div class="w-full max-w-sm bg-white rounded-xl shadow-lg p-5">
+                    <!-- Header -->
+                    <header class="text-center border-b pb-3 mb-4">
+                        <h1 class="text-xl font-extrabold text-[#073B4C]">SOHAR Business Snapshot</h1>
+                        <p class="text-sm text-[#118AB2]">Key Investment & Manpower Opportunities</p>
+                    </header>
+                    <main class="space-y-5">
+                        <!-- Investment Card -->
+                        <div>
+                            <h2 class="text-md font-bold text-center text-[#073B4C]">Investment Hotspots</h2>
+                            <div class="chart-container-mini">
+                                <canvas id="snapshotInvestmentChart"></canvas>
+                            </div>
+                        </div>
+                        <!-- Manpower Card -->
+                        <div>
+                            <h2 class="text-md font-bold text-center text-[#073B4C]">Manpower Demand (8,500+ Workforce)</h2>
+                            <div class="chart-container-mini">
+                                <canvas id="snapshotManpowerChart"></canvas>
+                            </div>
+                        </div>
+                        <!-- Growth Projects -->
+                        <div>
+                            <h2 class="text-md font-bold text-center text-[#073B4C] mb-2">Growth Projects</h2>
+                            <ul class="text-center text-sm space-y-1">
+                                <li class="bg-green-50 p-2 rounded-md">🏭 <span class="font-semibold text-green-800">Polysilicon Facility</span></li>
+                                <li class="bg-blue-50 p-2 rounded-md">🏗️ <span class="font-semibold text-blue-800">Infrastructure Expansion</span></li>
+                            </ul>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-6 hidden-section">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
+                <p class="text-lg text-gray-600">For healthcare business development partnerships or project discussions</p>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/50 text-center">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="mailto:zubin.qayam@outlook.com" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#005f73] to-[#0a9396] text-white rounded-lg hover:shadow-lg transition-all shadow-md">
+                        <i class="fas fa-envelope mr-2"></i> Email
+                    </a>
+                    <a href="tel:+96878572706" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-[#0a9396] to-[#94d2bd] text-white rounded-lg hover:shadow-lg transition-all shadow-md">
+                        <i class="fas fa-phone mr-2"></i> Call
+                    </a>
+                    <a href="https://www.linkedin.com/in/zubin-qayam-p-m-b22bb7170" target="_blank" class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-500 text-white rounded-lg hover:from-gray-800 hover:to-gray-600 transition-all shadow-md hover:shadow-lg">
+                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-[#001219] text-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold mb-2">Zubin Qayam Portfolio</h3>
+                <p class="text-gray-400">Healthcare Business Development Specialist</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8 text-sm text-gray-400 mb-6">
+                <span><i class="fas fa-envelope mr-2"></i> zubin.qayam@outlook.com</span>
+                <span><i class="fas fa-phone mr-2"></i> +968 7857 2706</span>
+                <span><i class="fas fa-map-marker-alt mr-2"></i> Sohar, Oman</span>
+            </div>
+            <p class="text-xs text-gray-500">
+                &copy; <span id="copyright-year"></span> Zubin Qayam. All rights reserved.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="hidden fixed bottom-8 right-8 bg-[#005f73] text-white w-12 h-12 rounded-full shadow-lg hover:bg-[#0a9396] transition-all focus:outline-none">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- UI Interactivity ---
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible-section');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.hidden-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Smooth scrolling for navigation links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        return;
+                    }
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        const offset = 80; // Adjust for fixed nav
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = target.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // --- Tab Switching Logic ---
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('active-tab'));
+                    button.classList.add('active-tab');
+
+                    const tabName = button.getAttribute('data-tab');
+                    
+                    tabContents.forEach(content => {
+                        if (content.id === tabName) {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
+                        }
+                    });
+                     // Re-initialize charts if they are in the activated tab to prevent rendering issues
+                    if(tabName === 'sohar-snapshot') {
+                        initSnapshotCharts();
+                    }
+                });
+            });
+
+            // --- All Chart Initializations ---
+            const professionalPalette = {
+                primary: '#005f73',
+                secondary: '#0a9396',
+                accent: '#ee9b00',
+                danger: '#ca6702',
+                highlight: '#ae2012',
+                light: '#e9d8a6',
+                dark: '#001219'
+            };
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+            const wrapLabel = (str, maxWidth = 16) => {
+                if (str.length <= maxWidth) return str;
+                const words = str.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += `${word} `;
+                }
+                lines.push(currentLine.trim());
+                return lines;
+            };
+
+            // Chart 1: Investment & Workforce
+            new Chart(document.getElementById('investmentWorkforceChart').getContext('2d'), {
+                type: 'bar',
+                data: { labels: ['Marsa LNG', 'United Solar', 'Sohar Aluminium', 'Shurooq Solar'], datasets: [{ label: 'Estimated Investment (OMR Million)', data: [600, 210, 0, 0], backgroundColor: professionalPalette.primary, borderColor: '#fff', borderWidth: 2, borderRadius: 8, }, { label: 'Workforce Size', data: [5000, 4000, 2500, 1500], backgroundColor: professionalPalette.secondary, borderColor: '#fff', borderWidth: 2, borderRadius: 8, yAxisID: 'y1' }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { color: '#4b5563' }, title: { display: true, text: 'Investment (OMR Million)' } }, y1: { position: 'right', beginAtZero: true, grid: { drawOnChartArea: false }, ticks: { color: '#4b5563' }, title: { display: true, text: 'Workforce Size' } }, x: { grid: { display: false }, ticks: { color: '#4b5563' } } } }
+            });
+
+            // Chart 2: Progress
+            new Chart(document.getElementById('progressChart').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: ['Marsa LNG', 'United Solar', 'Sohar Aluminium', 'Shurooq Solar'], datasets: [{ label: 'Implementation Progress (%)', data: [85, 92, 78, 65], backgroundColor: [ professionalPalette.primary, professionalPalette.secondary, professionalPalette.accent, professionalPalette.danger ], borderColor: '#fff', borderWidth: 4, hoverOffset: 15 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true, color: '#4b5563' } } } }
+            });
+
+            // Chart 3: Market Potential
+            new Chart(document.getElementById('marketChart').getContext('2d'), {
+                type: 'radar',
+                data: { labels: ['Renewable Energy', 'Petrochemicals', 'Metals & Mining', 'Logistics & Ports', 'Construction', 'Manufacturing'], datasets: [{ label: 'Market Potential (1-10)', data: [9, 8, 7, 6, 8, 7], fill: true, backgroundColor: 'rgba(0, 95, 115, 0.2)', borderColor: professionalPalette.primary, pointBackgroundColor: professionalPalette.primary, pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: professionalPalette.primary }, { label: 'Current Penetration (1-10)', data: [6, 7, 5, 4, 6, 5], fill: true, backgroundColor: 'rgba(10, 147, 150, 0.2)', borderColor: professionalPalette.secondary, pointBackgroundColor: professionalPalette.secondary, pointBorderColor: '#fff', pointHoverBackgroundColor: '#fff', pointHoverBorderColor: professionalPalette.secondary }] },
+                options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { display: true }, suggestedMin: 0, suggestedMax: 10 } }, plugins: { legend: { position: 'top', labels: { color: '#4b5563' } } } }
+            });
+            
+            // Chart 4: Sector Demand (Manpower Tab)
+            new Chart(document.getElementById('sectorDemandChart').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: ['Refineries & Petrochemicals', 'Metals & Minerals', 'Logistics & Other Industries'], datasets: [{ data: [55, 35, 10], backgroundColor: [professionalPalette.primary, professionalPalette.secondary, professionalPalette.accent], borderColor: '#f1f5f9', borderWidth: 4 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { title: tooltipTitleCallback } } }, cutout: '60%' }
+            });
+
+            // Chart 5: Workforce Composition (Manpower Tab)
+            new Chart(document.getElementById('workforceCompositionChart').getContext('2d'), {
+                type: 'pie',
+                data: { labels: ['Omani Workforce', 'International Contractors'], datasets: [{ data: [60, 40], backgroundColor: [professionalPalette.secondary, professionalPalette.light], borderColor: '#f1f5f9', borderWidth: 4 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { title: tooltipTitleCallback } } } }
+            });
+            
+            // Chart 6: Skills Demand (Manpower Tab)
+            new Chart(document.getElementById('skillsDemandChart').getContext('2d'), {
+                type: 'bar',
+                data: { labels: [ wrapLabel('Mechanical (Fitters, Technicians, Millwrights)'), wrapLabel('Scaffolding & Rigging'), wrapLabel('Welding & Fabrication'), wrapLabel('Electrical & Instrumentation'), wrapLabel('Safety Officers & Support'), wrapLabel('Inspection (NDT, API)'), wrapLabel('Civil & Other Crafts') ], datasets: [{ label: 'Percentage of Workforce', data: [35, 20, 15, 12, 8, 6, 4], backgroundColor: professionalPalette.secondary, borderRadius: 4 }] },
+                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } } }, scales: { x: { beginAtZero: true, grid: { display: false }, ticks: { callback: value => value + '%' } }, y: { grid: { display: false } } } }
+            });
+
+            // Chart 7: Mobilization Timeline (Manpower Tab)
+            new Chart(document.getElementById('mobilizationTimelineChart').getContext('2d'), {
+                type: 'line',
+                data: { labels: ['Wk 1-2', 'Wk 3-4', 'Wk 5', 'Wk 6', 'Wk 7', 'Wk 8', 'Wk 9', 'Wk 10', 'Wk 11', 'Wk 12'], datasets: [{ label: 'Workforce on Site', data: [5, 15, 60, 95, 100, 100, 90, 65, 30, 10], backgroundColor: 'rgba(10, 147, 150, 0.2)', borderColor: professionalPalette.secondary, tension: 0.3, fill: true }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } } }, scales: { y: { beginAtZero: true, ticks: { callback: value => value + '%' } }, x: { grid: { display: false } } } }
+            });
+
+            // Chart 8: Investment Hotspots (SOHAR Tab)
+            new Chart(document.getElementById('investmentChart').getContext('2d'), {
+                type: 'doughnut',
+                data: { labels: ['Green Manufacturing', 'Energy', 'Logistics'], datasets: [{ label: 'Investment Share', data: [50, 35, 15], backgroundColor: [professionalPalette.primary, professionalPalette.secondary, professionalPalette.accent], borderColor: '#FFFFFF', borderWidth: 4, }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { title: tooltipTitleCallback } }, title: { display: false } } }
+            });
+
+            // Chart 9: Manpower Opportunities (SOHAR Tab)
+            new Chart(document.getElementById('manpowerChart').getContext('2d'), {
+                type: 'bar',
+                data: { labels: ['Mechanical', 'Scaffolding', 'Welding', 'E&I', 'Safety'], datasets: [{ label: 'Required Workforce %', data: [35, 20, 15, 12, 8], backgroundColor: [professionalPalette.secondary, professionalPalette.primary, professionalPalette.accent, professionalPalette.danger, professionalPalette.dark], borderRadius: 4 }] },
+                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } }, title: { display: false } }, scales: { x: { beginAtZero: true, grid: { display: false } }, y: { grid: { display: false } } } }
+            });
+
+            // Chart 10 & 11: Snapshot Charts (Snapshot Tab)
+            let snapshotInvestmentChart, snapshotManpowerChart;
+            function initSnapshotCharts() {
+                if (snapshotInvestmentChart) snapshotInvestmentChart.destroy();
+                snapshotInvestmentChart = new Chart(document.getElementById('snapshotInvestmentChart').getContext('2d'), {
+                    type: 'doughnut',
+                    data: { labels: ['Green Mfg.', 'Energy', 'Logistics'], datasets: [{ data: [50, 35, 15], backgroundColor: [professionalPalette.primary, professionalPalette.secondary, professionalPalette.accent], borderColor: '#FFFFFF', borderWidth: 2 }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '60%' }
+                });
+
+                if (snapshotManpowerChart) snapshotManpowerChart.destroy();
+                snapshotManpowerChart = new Chart(document.getElementById('snapshotManpowerChart').getContext('2d'), {
+                    type: 'bar',
+                    data: { labels: ['Mechanical', 'Scaffolding', 'Welding'], datasets: [{ data: [35, 20, 15], backgroundColor: [professionalPalette.secondary, professionalPalette.primary, professionalPalette.accent], borderRadius: 3 }] },
+                    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { display: false }, y: { ticks: { font: { size: 10 } } } } }
+                });
+            }
+
+            // --- Gemini AI Feature (SOHAR Tab) ---
+            const generateSummaryBtn = document.getElementById('generateSummaryBtn');
+            const generateStrategyBtn = document.getElementById('generateStrategyBtn');
+            const aiOutputContainer = document.getElementById('ai-output');
+            const aiOutputTitle = document.getElementById('ai-output-title');
+            const aiOutputContent = document.getElementById('ai-output-content');
+            function getPageContext() {
+                const kpis = `Total Investment: $30B+, Freezone Area: 21M+ sq m, Recurring Shutdown Workforce: 8,500+`;
+                const investmentHotspots = `Green Manufacturing (50%), Energy (35%), Logistics (15%)`;
+                const projectPipeline = `Infrastructure Expansion (670-hectare development), Polysilicon Facility (largest in Middle East), Iron Ore Plant (Oman's first)`;
+                const strategicAdvantages = `Strategic Location (outside Strait of Hormuz), World-Class Infrastructure, Strong Investor Confidence`;
+                return `SOHAR Port and Freezone Key Data:\n- Key Performance Indicators: ${kpis}\n- Recent Investment Hotspots: ${investmentHotspots}\n- Future Project Pipeline: ${projectPipeline}\n- Core Strategic Advantages: ${strategicAdvantages}`;
+            }
+            async function callGeminiAPI(prompt, button) {
+                aiOutputContainer.style.display = 'block';
+                aiOutputContent.innerHTML = '<div class="flex items-center justify-center"><i class="fas fa-spinner fa-spin mr-2"></i>Generating insights... Please wait.</div>';
+                button.disabled = true;
+                button.classList.add('opacity-50', 'cursor-not-allowed');
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const payload = { contents: [{ parts: [{ text: prompt }] }], };
+                try {
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (!response.ok) { const errorBody = await response.text(); throw new Error(`API error: ${response.status} ${response.statusText} - ${errorBody}`); }
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        let text = candidate.content.parts[0].text;
+                        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        text = text.replace(/\n\s*-\s/g, '</li><li>');
+                        text = text.replace(/\n\s*\*\s/g, '</li><li>');
+                        text = text.replace(/\n\s*(\d+)\.\s/g, '</li><li>');
+                        text = text.replace(/^(.*?)(\n)?/,'<li>$1</li>');
+                        text = `<ul>${text}</ul>`.replace(/<\/li>$/, '');
+                        text = text.replace(`<ul><li></li>`, '<ul>');
+                        text = text.replace(/\n/g, '<br>');
+                        aiOutputContent.innerHTML = text;
+                    } else {
+                         aiOutputContent.textContent = 'Could not generate a valid response. The API returned an unexpected structure. Please try again.';
+                         console.error('Unexpected API response structure:', result);
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    aiOutputContent.textContent = 'An error occurred while generating the content. Please check the console for details and ensure you have a valid API key if required.';
+                } finally {
+                    button.disabled = false;
+                    button.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+            generateSummaryBtn.addEventListener('click', () => {
+                const pageContext = getPageContext();
+                const prompt = `Act as a world-class business analyst for an investment firm. Generate a concise, professional executive summary based on the following data about SOHAR Port and Freezone in Oman. The summary should be suitable for a busy executive and highlight the key investment figures, strategic projects, and primary advantages. Format it with a clear heading and short, impactful paragraphs.\n\nDATA:\n${pageContext}`;
+                aiOutputTitle.textContent = "Generated Executive Summary";
+                callGeminiAPI(prompt, generateSummaryBtn);
+            });
+            generateStrategyBtn.addEventListener('click', () => {
+                const pageContext = getPageContext();
+                const prompt = `Act as a senior business strategist for a consultancy. Create a high-level, bulleted go-to-market strategy outline for a new company providing specialized industrial services (e.g., advanced safety solutions, predictive maintenance, logistics tech) looking to enter the SOHAR Port and Freezone market. Use the provided data to inform the strategy, focusing on target sectors, initial value proposition, and key partnership opportunities. Format the output with clear headings for each section of the strategy and use bullet points.\n\nDATA:\n${pageContext}`;
+                aiOutputTitle.textContent = "Draft Go-to-Market Strategy";
+                callGeminiAPI(prompt, generateStrategyBtn);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
